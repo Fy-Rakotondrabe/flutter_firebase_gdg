@@ -75,7 +75,7 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                           ),
                           IconButton(
                             onPressed: () => toogleFav(
-                              hotel.id,
+                              hotel.id!,
                               !hotel.favorite,
                             ),
                             icon: Icon(

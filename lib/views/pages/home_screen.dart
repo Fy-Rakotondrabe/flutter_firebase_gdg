@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/models/hotel_model.dart';
 import 'package:flutter_firebase/services/hotel_service.dart';
+import 'package:flutter_firebase/views/pages/add_screen.dart';
 import 'package:flutter_firebase/views/widgets/hotel_item.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -62,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
         isLastPage = false;
         lastItemIdx = null;
       });
-      final result = await service.getPaginateHotels(lastItemIdx, pageSize);
+      final result = await service.getPaginateHotels(null, pageSize);
       if (result.length < pageSize) {
         setState(() {
           isLastPage = false;
@@ -156,6 +157,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) => const AddScreen(),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

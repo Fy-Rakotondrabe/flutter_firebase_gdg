@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Hotel {
-  final String id;
+  final String? id;
   final String title;
   final String description;
   final String image;
@@ -7,7 +9,7 @@ class Hotel {
   final DateTime creationDate;
 
   Hotel({
-    required this.id,
+    this.id,
     required this.title,
     required this.description,
     required this.image,
@@ -27,4 +29,13 @@ class Hotel {
       ),
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": title,
+        "description": description,
+        "image": image,
+        "favorite": favorite,
+        "creation_date": Timestamp.fromDate(creationDate),
+      };
 }

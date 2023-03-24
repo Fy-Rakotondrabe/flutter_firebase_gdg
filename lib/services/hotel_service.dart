@@ -1,8 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_firebase/models/hotel_model.dart';
 
 class HotelService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FirebaseStorage storage = FirebaseStorage.instance;
 
   final CollectionReference hotels = FirebaseFirestore.instance.collection(
     'hotels',
@@ -57,5 +61,17 @@ class HotelService {
 
   Stream<DocumentSnapshot<Object?>> getHotelById(String id) {
     return hotels.doc(id).snapshots();
+  }
+
+  Future<String> saveImage(String filename, Uint8List fileBytes) async {
+    // Upload file
+    final ref = storage.ref(filename);
+    await ref.putData(fileBytes);
+    String downloadUrl = await ref.getDownloadURL();
+    return downloadUrl;
+  }
+
+  Future<void> saveHotel(Hotel hotel) async {
+    await hotels.add(hotel.toJson());
   }
 }
