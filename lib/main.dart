@@ -20,30 +20,30 @@ void main() async {
     ),
   ]);
 
-  // await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
 
-  // FirebaseMessaging messaging = FirebaseMessaging.instance;
-  // final fcmToken = await FirebaseMessaging.instance.getToken();
-  // print('-------------token: $fcmToken');
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  print('-------------token: $fcmToken');
 
-  // await messaging.requestPermission(
-  //   alert: true,
-  //   announcement: false,
-  //   badge: true,
-  //   carPlay: false,
-  //   criticalAlert: false,
-  //   provisional: false,
-  //   sound: true,
-  // );
+  await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
 
-  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-  //   print('Got a message whilst in the foreground!');
-  //   print('Message data: ${message.data}');
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${message.data}');
 
-  //   if (message.notification != null) {
-  //     print('Message also contained a notification: ${message.notification}');
-  //   }
-  // });
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
+    }
+  });
 
   runApp(const MyApp());
 }
